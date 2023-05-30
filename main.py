@@ -58,10 +58,11 @@ columns=pow(rows,2);
 newQ=[];
 M={};
 
-for i in range(rows):
-    for j in range(rows):
-        M[(i,j)]='r'+str(i) + str(j);
-# predecesor=[q for q,delta[q] in delta.items() if q in delta[q].keys() and delta[q][q]!='e' and q!= l for l in Q];
+# for i in range(rows):
+#     for j in range(rows):
+#         M[(i,j)]='r'+str(i) + str(j);
+        
+# predecesor=[q for q,delta[q] in delta.items() if q in delta[q].keys() and delta[q][q]!='e' and q!= l for l in Q]; #state if not class?
 # succesor=[q for q,delta[q] in delta[l for l in Q].items() if (delta[q]!='e' and q!=l for l in Q)];
 # def get_if_loop(a,state):
 #     if(delta[state][state]!='e'):
@@ -72,7 +73,6 @@ for i in range(rows):
 #     for i in predecesor:
 #             for j in succesor:
 #                 inter_loop = get_if_loop(q)
-#                 # print('i : ', i, ' j : ', j)
 #                 delta[i][j] = '+'.join(('(' + delta[i][j] + ')', ''.join(('(' + delta[i][q] + ')', '(' + inter_loop + ')' + '', '(' + delta[q][j] + ')'))));
 #     new_delta = {r: {c: v for c, v in val.items() if c != q} for r, val in delta.items() if r != q}  # remove inter node
 #     delta = deepcopy(new_delta);
@@ -81,8 +81,20 @@ for i in range(rows):
 # init_to_final = new_delta[start][final[0]] + '(' + new_delta[final[0]][final[0]] + ')' + ''
 # final_to_init = new_delta[final[0]][start]
 # re = '(' + '(' + start_bucla + ')' + '+' + '(' + init_to_final + ')' + '(' + final_to_init + ')' + ')' + '' + '(' + init_to_final + ')'
-# # re = '(' + re + ')'
-# print('Regular Expression : ', re);
+
+for i in range(rows):
+    if(i!=j):
+        for j in sigma:
+            if(delta[(i,j)]=='q0'):
+                M[(i,j)]=str(j);
+    else:
+        for j in sigma:
+            if (delta[(i, j)] == 'q0'):
+                M[(i,j)]=str(j)+'+'+'e';
+                
+# for i in range(rows):
+#     for j in range(1,columns):
+#         #r(k+1,(i,j))=union(r(k,(i,j)),r(k,(i,k+1)) . (r(k,(k+1,k+1)))* .r(k,(k+1,j))
 
 for i in range(rows):
     for j in range(1,columns):
